@@ -1,5 +1,6 @@
 import React, { createContext, useState, ReactNode, FC, useEffect } from "react";
 import IPost from "../../Interfaces/IPosts";
+import swal from 'sweetalert';
 
 interface IPostContext {
     items: IPost[];
@@ -73,14 +74,23 @@ const PostProvider: FC<IPostProvider> = ({ children }) => {
     }, [])
 
     const _removeItem = (id: number) => {
-        let itms: IPost[] = [..._items];
-        console.log(itms);
+        swal({ title: "Are you sure you want to delete the post?", icon: "warning", dangerMode: true })
+            .then(async (willDelete) => {
+                if (willDelete) {
 
-        let itm: IPost = itms.find((_: IPost) => _.id === id)!;
-        itms = utilRemoveItem(itms, itm)!
+                    let itms: IPost[] = [..._items];
 
-        setItems([...itms]);
+                    let itm: IPost = itms.find((_: IPost) => _.id === id)!;
+                    itms = utilRemoveItem(itms, itm)!
 
+                    setItems([...itms]);
+
+                    swal({ title: "Delete Post", text: "Post Deleted.", icon: "success", timer: 2000 });
+
+                } else {
+                    swal({ title: "Delete Post", text: "Delete Post Canceled.", icon: "error", timer: 2000 });
+                }
+            });
     }
 
     function api(url: string) {
