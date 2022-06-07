@@ -11,12 +11,6 @@ interface table {
     itemsLoading: boolean;
     items: IPost[];
 }
-interface header {
-    title: string;
-    dataIndex: string;
-    key: string;
-    width?: string;
-}
 
 const CustomTable: FC<table> = ({ headers, itemsLoading, items }) => {
     const [loading, setLoading] = useState(false)
@@ -33,19 +27,20 @@ const CustomTable: FC<table> = ({ headers, itemsLoading, items }) => {
                 title: _,
                 key: _.toLowerCase(),
                 dataIndex: _.toLowerCase(),
-                render: (btns) => {
-                    return (<Space size="middle">
-                        {
-                            btns.map((_: ICustomButton) => <CustomButton color={_.color} _key={_.id + _.color} onClick={_.onClick} loading={_.loading === undefined ? false : _.loading} >{_.children}</CustomButton>)
-                        }
-                    </Space>)
-                },
+                render: (btns) => (<Space size="middle">
+                    {
+                        btns.map((_: ICustomButton) => <CustomButton color={_.color} _key={_.id + _.color} onClick={_.onClick} loading={_.loading === undefined ? false : _.loading} >{_.children}</CustomButton>)
+                    }
+                </Space>),
             })
         }
     }), [headers]);
 
     const _items = useMemo(
-        () => items.map(_ => ({ ..._, key: _.id })),
+        () => {
+            console.log('actualizo')
+            return items.map(_ => ({ ..._, key: _.id }))
+        },
         [items]
     );
 
