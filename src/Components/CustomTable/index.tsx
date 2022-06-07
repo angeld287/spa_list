@@ -33,13 +33,13 @@ const CustomTable: FC<table> = ({ headers, itemsLoading, items }) => {
                 title: _,
                 key: _.toLowerCase(),
                 dataIndex: _.toLowerCase(),
-                render: (btns) => (
-                    <Space size="middle">
+                render: (btns) => {
+                    return (<Space size="middle">
                         {
-                            btns.map((_: ICustomButton) => <CustomButton color={_.color} _key={_.id + _.color} onClick={_.onClick} loading={_.loading === undefined ? false : _.loading} >{_.children === undefined ? "" : _.children === null ? "" : _.children}</CustomButton>)
+                            btns.map((_: ICustomButton) => <CustomButton color={_.color} _key={_.id + _.color} onClick={_.onClick} loading={_.loading === undefined ? false : _.loading} >{_.children}</CustomButton>)
                         }
-                    </Space>
-                ),
+                    </Space>)
+                },
             })
         }
     }), [headers]);

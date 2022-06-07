@@ -16,7 +16,7 @@ const PostsList: FC = () => {
         body: 'This is the body of the post',
         title: 'this is the title of the post',
         actions: [
-            { id: '1', color: 'blue', icon: EditOutlined, onClicAction: () => { console.log(1) }, text: "Remove" },
+            { id: '1', color: 'blue', onClick: () => { console.log(1) }, children: "Remove", loading: false, _key: '2' },
         ],
     }
     _items = [post]
