@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import CustomTable from './index';
 import IPost from '../../Interfaces/IPosts'
+import { EditOutlined } from '@ant-design/icons';
 
 let _headers: string[] = []
 let _items: IPost[];
@@ -25,7 +26,10 @@ beforeAll(() => {
     id: 1,
     userId: 1,
     body: 'This is the body of the post',
-    title: 'this is the title of the post'
+    title: 'this is the title of the post',
+    actions: [
+      { id: '1', color: 'blue', icon: EditOutlined, onClicAction: () => { console.log(1) }, text: "Remove" },
+    ],
   }
   _items = [post]
 });
