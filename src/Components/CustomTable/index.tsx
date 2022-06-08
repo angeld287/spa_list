@@ -1,5 +1,5 @@
 import { Space, Table } from 'antd';
-import { FC, useEffect, useMemo, useState } from 'react'
+import React, { FC, useEffect, useMemo, useState } from 'react'
 import type { ColumnsType } from 'antd/lib/table';
 import CustomButton from '../CustomButton';
 import { ICustomButton } from '../CustomButton'
@@ -54,4 +54,4 @@ const CustomTable: FC<table> = ({ headers, itemsLoading, items }) => {
 
 }
 
-export default CustomTable
+export default React.memo(CustomTable)
